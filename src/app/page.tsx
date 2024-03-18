@@ -1,9 +1,9 @@
-import LoginCard from '@/pages/landing/components/LoginCard';
+import LandingPage from '@/pages/landing/Landingpage';
 import { Box } from '@chakra-ui/react'
 export default function Home() {
   return (
     <Box>
-      <LoginCard></LoginCard>
+      <LandingPage></LandingPage>
     </Box>
   );
 }

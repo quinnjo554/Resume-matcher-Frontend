@@ -6,8 +6,6 @@ import {
   Heading,
   CardBody,
   Box,
-  Flex,
-  Text
 } from "@chakra-ui/react";
 import LoginModalInputs from "@/components/Inputs/LoginInputs/LoginInputs";
 export default function LoginCard() {
@@ -17,7 +15,7 @@ export default function LoginCard() {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      width="70%"
+      width="40%"
       height="100vh"
       position="fixed"
       right="0"

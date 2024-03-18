@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar/Navbar';
 import { Box, Card, CardBody, CardFooter, Flex, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 
