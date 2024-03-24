@@ -13,10 +13,13 @@ function Homepage() {
   const dUser = createDefaultUser(name, email); //autoinit a user
   //get the user  
   const { data: user, isError } = useUserEmail(email, dUser);
-  return (
 
+
+
+  console.log(user)
+  return (
     <Navbar>
-      <div>{user?.name}</div>
+      <div>{user?.email ?? "s"}</div>
     </Navbar>
   );
 }

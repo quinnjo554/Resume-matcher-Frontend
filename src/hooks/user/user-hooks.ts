@@ -4,13 +4,14 @@ import UserRequest from "../../models/user/UserRequest";
 
 export function useUserEmail(email: string, user: UserRequest): UseQueryResult<User, unknown> {
   return useQuery(['User', email], async () => {
-    const response = await fetch(`http://localhost:8000/user/${email}`);
-    if (response.status == 500) { //change to the proper error. should be unique to user not posted
+    const response = await fetch(`http://localhost:8000/user/email/${email}`);
+    console.log(response.statusText);
+    if (response.statusText == "Not Found") { //change to the proper error. should be unique to user not posted
       PostUser(user);
     }
     const data = await response.json();
     return data
-  })
+  }, { enabled: !!email });
 }
 
 export function getUser(email: string | undefined): UseQueryResult<User, unknown> {
@@ -22,7 +23,8 @@ export function getUser(email: string | undefined): UseQueryResult<User, unknown
 }
 
 export async function PostUser(user: UserRequest) {
-  const response = await fetch('http://localhost:8000/user/add', {
+  console.log(JSON.stringify(user));
+  const response = await fetch(`http://localhost:8000/user/add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -30,5 +32,7 @@ export async function PostUser(user: UserRequest) {
     body: JSON.stringify(user)
   });
   const data = await response.json();
+
+  console.log({ data });
   return data;
 }

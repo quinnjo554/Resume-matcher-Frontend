@@ -1,7 +1,7 @@
 interface UserRequest {
-  name: string;
-  email: string;
+  username: string;
   pfp: string;
+  email: string;
 }
 
 export default UserRequest;
