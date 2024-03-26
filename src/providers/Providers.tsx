@@ -9,10 +9,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const [client] = useState(new QueryClient());
 
   return (
-    <GlobalContextProvider>
-      <ChakraProvider>
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
-      </ChakraProvider>
-    </GlobalContextProvider>
+    <ChakraProvider>
+      <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    </ChakraProvider>
   );
 }

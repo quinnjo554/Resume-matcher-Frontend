@@ -13,19 +13,20 @@ import KompletionLogo from "../../../public/kompletionLogo.jpg"
 import { IconButton, Input } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import { signOut } from 'next-auth/react';
+import User from '../../models/user/User';
 
 //have this take a user. Display a users avatar and jobs
 
-function Navbar({ children }: { children: ReactNode }) {
+function Navbar({ children, user }: { children: ReactNode, user: User }) {
   return (
     <Box className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <NavbarVert></NavbarVert>
-      <NavbarHori>{children}</NavbarHori>
+      <NavbarHori user={user}>{children}</NavbarHori>
     </Box>
   )
 }
 
-function NavbarHori({ children }: { children: ReactNode }) {
+function NavbarHori({ user, children }: { user: User, children: ReactNode }) {
   return (
     <div className="flex flex-col">
       <header className="flex h-26 lg:h-[80px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-200/40">
@@ -50,7 +51,7 @@ function NavbarHori({ children }: { children: ReactNode }) {
             </IconButton>
           </Box>
         </div>
-        <Avatar></Avatar>
+        <Avatar size="lg" src={user?.pfp ?? ""}></Avatar>
       </header>
       {children}
     </div>
