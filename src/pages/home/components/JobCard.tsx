@@ -1,62 +1,56 @@
-import { Center, Box, List, ListItem, Card, CardBody, CardFooter, Flex, Image, Text } from '@chakra-ui/react';
-import React from 'react';
-import { BiBriefcase, BiCheckSquare, BiCoinStack, BiDotsVerticalRounded } from 'react-icons/bi';
+import User from '@/models/user/User';
+import {
+  Box, Text, VStack, HStack, Divider, Menu, MenuButton, IconButton, MenuItem, MenuList, Card,
+  CircularProgress,
+  CircularProgressLabel,
+} from "@chakra-ui/react";
+import React, { memo, useEffect, useState } from 'react';
+import { FaBriefcase, FaEllipsisH, FaCheckCircle, FaEdit, FaTrashAlt, FaMapPin, FaCalendarAlt, FaUsers, FaClock, FaStar, FaCalendarCheck } from 'react-icons/fa';
+import Job from '@/models/job/job';
+import { useCandidatesByJobId } from '@/hooks/candidates/candidates-hooks';
+import { motion } from 'framer-motion';
+import { CanidateInfo } from './CanidateInfo';
 
-
-function JobCard() {
-  return (
-    <Card w="full" p="6" mx="auto" maxW="3xl" boxShadow="lg" rounded="2xl">
-      <CardBody>
-        <Box textAlign="center">
-          <Center>
-            <BiBriefcase className='h-5 w-5' />
-          </Center>
-          <Text as="h1" mt="1" fontSize="2xl">Job Title</Text>
-          <Center>
-            <List mt="5">
-              <ListItem mt="1" mb="1">
-                <Flex>
-                  <BiCheckSquare className='relative top-1'></BiCheckSquare>
-                  <Text>
-                    Marked As Filled
-                  </Text>
-                </Flex>
-              </ListItem>
-              <ListItem mb="1">
-                <Flex>
-                  <BiDotsVerticalRounded className='relative top-1'></BiDotsVerticalRounded>
-                  <Text>
-                    Edit Job
-                  </Text>
-                </Flex>
-              </ListItem>
-              <ListItem mb="1">
-                <Flex>
-                  <BiCoinStack className='relative top-1'></BiCoinStack>
-                  <Text>
-                    Delete
-                  </Text>
-                </Flex>
-              </ListItem>
-            </List>
-          </Center>
+const JobCard = memo(({ job }: { job: Job }) => {
+  const { data: candidates, isError } = useCandidatesByJobId(Number(job.id));
+  if (isError) {
+    return <p>Error</p>
+  }
+  console.log({ candidates })
+  return (candidates && (
+    <Card shadow="2xl" display="flex" w="1100px" maxW="1100px" minW="100px" >
+      <HStack alignSelf="center" p={4} spacing={4} alignItems="center">
+        <FaBriefcase size={24} />
+        <Text fontSize="lg" fontWeight="semibold">{job.name}</Text>
+        <Box position="absolute" top={2} right={2}>
+          <Menu>
+            <MenuButton as={IconButton} icon={<FaEllipsisH />} />
+            <MenuList>
+              <MenuItem icon={<FaEdit />}>Edit job</MenuItem>
+              <MenuItem icon={<FaTrashAlt color="red.500" />}>Delete</MenuItem>
+            </MenuList>
+          </Menu>
         </Box>
-        <Center>
-          <List className='flex mt-5'>
-            <ListItem mr="1">
-              Info
-            </ListItem>
-            <ListItem mr="1">
-              Info
-            </ListItem>
-            <ListItem mr="1">
-              Info
-            </ListItem>
-          </List>
-        </Center>
-      </CardBody>
+      </HStack>
+      <HStack width="full" alignSelf="center" p={4} spacing={4}>
+        <FaMapPin opacity={0.5} />
+        <Text>New York, NY</Text>
+        <Divider orientation="vertical" height="16px" mx={2.5} />
+        <FaCalendarCheck opacity={0.5} />
+        <Text>2w ago</Text>
+        <Divider orientation="vertical" height="16px" mx={2.5} />
+        <FaUsers opacity={0.5} />
+        <Text>3 candidates</Text>
+        <Divider orientation="vertical" height="16px" mx={2.5} />
+        <FaStar opacity={0.5} />
+        <Text>High priority</Text>
+      </HStack>
+      {candidates?.map((candidate, value) => {
+        return <CanidateInfo key={value} name={candidate.name} title={candidate.contact} description={candidate.resume} match={candidate.rubric_score} value={value} />
+      })}
     </Card>
-  );
-}
+  )
+  )
+})
 
-export default JobCard;
+export default JobCard
