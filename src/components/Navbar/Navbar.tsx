@@ -1,6 +1,7 @@
 "use client"
 import React, { ReactNode } from 'react'
 import { Box, VStack, HStack, Link, Image, Text, Flex, Avatar } from "@chakra-ui/react";
+import { useDisclosure } from '@chakra-ui/react'
 import {
   BiHome,
   BiBarChartAlt2,
@@ -14,10 +15,9 @@ import { IconButton, Input } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import { signOut } from 'next-auth/react';
 import User from '../../models/user/User';
-
 //have this take a user. Display a users avatar and jobs
 
-function Navbar({ children, user }: { children: ReactNode, user: User }) {
+function Navbar({ children, user }: { children: ReactNode, user: User}) {
   return (
     <Box className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <NavbarVert></NavbarVert>
@@ -59,6 +59,7 @@ function NavbarHori({ user, children }: { user: User, children: ReactNode }) {
 }
 
 function NavbarVert() {
+
   return (
     <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-200/40">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -85,7 +86,7 @@ function NavbarVert() {
               href="#"
             >
               <BiBarChartAlt2 className="h-4 w-4" />
-              Rubric
+              Create Job
             </Link>
             <Link
               className="flex text-lg items-center gap-3 rounded-lg px-3 py-2 text-black transition-all hover:text-gray-400 dark:text-black dark:hover:text-gray-400"
