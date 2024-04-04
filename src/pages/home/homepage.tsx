@@ -1,5 +1,5 @@
 "use client"
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
@@ -9,8 +9,6 @@ import { Box } from '@chakra-ui/react';
 import { useMediaQuery } from '@chakra-ui/react';
 import { useJobByUserId } from '@/hooks/job/job-hooks';
 import JobBoard from './components/JobBoard';
-import RubricModal from '../../components/Modal/RubricModal.tsx'
-import ModalContext from '../../providers/ModalContext.tsx'
 import { useDisclosure } from '@chakra-ui/react'
 function Homepage() {
 
@@ -21,7 +19,6 @@ function Homepage() {
   //get the user  
   const { data: user, isError } = useUserEmail(email, dUser);
   const [isLargeScreen] = useMediaQuery('(min-width: 768px)');
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     user && (
@@ -29,15 +26,14 @@ function Homepage() {
         {isLargeScreen ? (
           // Center on large screens using flexbox
           <Box display="flex" mt={6} alignSelf="center" justifyContent="center">
-            <JobBoard onOpen={onOpen} user={user} />
+            <JobBoard user={user} />
           </Box>
         ) : (
           // Center horizontally on smaller screens using CSS margin: auto
           <Box marginX="auto" mt={6}>
-            <JobBoard onOpen={onOpen} user={user} />
+            <JobBoard user={user} />
           </Box>
         )}
-          <RubricModal onOpen={onOpen} isOpen={isOpen} onClose={onClose}/>
       </Navbar>
     )
   );

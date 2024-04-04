@@ -17,16 +17,16 @@ import { signOut } from 'next-auth/react';
 import User from '../../models/user/User';
 //have this take a user. Display a users avatar and jobs
 
-function Navbar({ children, user }: { children: ReactNode, user: User}) {
+function Navbar({ children, user, hasSearch }: { children: ReactNode, user: User, hasSearch: boolean }) {
   return (
     <Box className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <NavbarVert></NavbarVert>
-      <NavbarHori user={user}>{children}</NavbarHori>
+      <NavbarHori hasSearch={hasSearch} user={user}>{children}</NavbarHori>
     </Box>
   )
 }
 
-function NavbarHori({ user, children }: { user: User, children: ReactNode }) {
+function NavbarHori({ user, children, hasSearch = true }: { user: User, children: ReactNode, hasSearch?: boolean }) {
   return (
     <div className="flex flex-col">
       <header className="flex h-26 lg:h-[80px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-200/40">
@@ -42,13 +42,17 @@ function NavbarHori({ user, children }: { user: User, children: ReactNode }) {
               width: 500,
             }}
           >
-            <Input
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search Jobs..."
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <BiSearch />
-            </IconButton>
+            {hasSearch && (
+              <>
+                <Input
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search Jobs..."
+                />
+                <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                  <BiSearch />
+                </IconButton>
+              </>
+            )}
           </Box>
         </div>
         <Avatar size="lg" src={user?.pfp ?? ""}></Avatar>
@@ -83,7 +87,7 @@ function NavbarVert() {
             </Link>
             <Link
               className="flex text-lg items-center gap-3 rounded-lg px-3 py-2 text-black transition-all hover:text-gray-400 dark:text-black dark:hover:text-gray-400"
-              href="#"
+              href="/createjob"
             >
               <BiBarChartAlt2 className="h-4 w-4" />
               Create Job
