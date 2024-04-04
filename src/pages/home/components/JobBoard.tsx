@@ -1,10 +1,8 @@
-
 import React, { memo } from 'react'
-import { User } from 'next-auth'
 import { useJobByUserId } from '@/hooks/job/job-hooks';
 import { Box, SkeletonCircle, useMediaQuery } from "@chakra-ui/react"
 import JobCard from './JobCard';
-
+import User from '@/models/user/User';
 const JobBoard = memo(({ user }: { user: User }) => {
   const { data: jobs, isError, isLoading } = useJobByUserId(Number(user.id));
   if (isLoading) {

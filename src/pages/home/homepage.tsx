@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
@@ -9,6 +9,7 @@ import { Box } from '@chakra-ui/react';
 import { useMediaQuery } from '@chakra-ui/react';
 import { useJobByUserId } from '@/hooks/job/job-hooks';
 import JobBoard from './components/JobBoard';
+import { useDisclosure } from '@chakra-ui/react'
 function Homepage() {
 
   //add user to db if user hasnt already been added
@@ -19,8 +20,6 @@ function Homepage() {
   const { data: user, isError } = useUserEmail(email, dUser);
   const [isLargeScreen] = useMediaQuery('(min-width: 768px)');
 
-
-  console.log(user)
   return (
     user && (
       <Navbar user={user}>

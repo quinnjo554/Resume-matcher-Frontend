@@ -2,8 +2,11 @@ interface Candidate {
   id: number;
   name: string;
   resume: string;
-  rubric_score: number;
+  resume_score: number;
   contact: string;
   job: number; //id
 }
+
+// rubric needs to have a job id
+// 
 export default Candidate;
