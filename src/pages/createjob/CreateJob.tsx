@@ -5,6 +5,8 @@ import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
 import React from 'react'
 import JobInputs from './components/JobInputs';
+import { Box, Center, Heading } from '@chakra-ui/react';
+import ResumeUpload from './components/ResumeUpload';
 
 function CreateJob() {
 
@@ -18,8 +20,12 @@ function CreateJob() {
   return (
     user && (
       <Navbar hasSearch={false} user={user}>
-        <JobInputs></JobInputs>
-      </Navbar>
+        <Box alignSelf="center" p={5} width="50%">
+          <Heading size="2xl" p={2} pb={4}>Create Job</Heading>
+          <JobInputs></JobInputs>
+          <ResumeUpload></ResumeUpload>
+        </Box>
+      </Navbar >
     )
   )
 }

@@ -1,10 +1,10 @@
-import { Card, Box, Input, Textarea, Text } from '@chakra-ui/react'
+import { Card, Box, Input, Textarea, Text, Select, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 
 function JobInputs() {
   return (
     <Box>
-      <Card>
+      <Card p={4} display="flex" shadow="2xl" bg="white">
         <Box className="space-y-4">
           <div className="space-y-2">
             <Text className="text-lg font-medium leading-none tracking-tighter">
@@ -31,12 +31,13 @@ function JobInputs() {
           </div>
           <div className="space-y-2">
             <Text className="text-lg font-medium leading-none tracking-tighter">
-              Tags
+              Priority
             </Text>
-            <Input className="w-full text-lg" id="tags" placeholder="Enter tags" />
-            <div className="text-sm">
-              Enter a comma-separated list of tags that best describe the job (e.g., remote, full-time, javascript).
-            </div>
+            <Select className="w-full text-lg" placeholder='Select Priority'>
+              <option value='Low'>Low</option>
+              <option value='Medium'>Medium</option>
+              <option value='High'>High</option>
+            </Select>
           </div>
         </Box>
       </Card>
