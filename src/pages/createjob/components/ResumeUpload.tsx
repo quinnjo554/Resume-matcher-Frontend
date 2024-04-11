@@ -1,14 +1,15 @@
+import React from 'react';
+import { Box, Heading, Text, Icon, Card, VStack, HStack } from "@chakra-ui/react";
+import { FiPlus, FiFile } from "react-icons/fi";
+import { useJobForm } from '@/hooks/job/job-hooks';
 
-import { Box, Heading, Text, Icon, Card } from "@chakra-ui/react";
-import { FiPlus } from "react-icons/fi";
 function ResumeUpload() {
+  const { formState, setFormState } = useJobForm(); // Use the context
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files ? Array.from(event.target.files) : [];
-    files.forEach(file => {
-      console.log(file);
-      // handle each file here
-    });
+    // Update the form state with the selected files
+    setFormState(prevState => ({ ...prevState, resumes: [...prevState.resumes, ...files] }));
   };
 
   return (
@@ -24,8 +25,24 @@ function ResumeUpload() {
         <input type="file" accept=".pdf" onChange={onFileChange} style={{ display: 'none' }} id="file-upload" multiple />
         <label htmlFor="file-upload" className="cursor-pointer">Click to select files</label>
       </Box>
+      <Box>
+        {formState.resumes.map((value, index) => {
+          return (
+            <VStack key={index} align="start" spacing={4}>
+              <HStack m={3} key={index} spacing={4}>
+                <Text>{index + 1}.</Text>
+                <Box boxSize={6} color="blue.500">
+                  <Icon as={FiFile} boxSize="100%" />
+                </Box>
+                <Text fontSize="lg" fontWeight="medium">{value.name}</Text>
+              </HStack>
+            </VStack>
+          )
+        })}
+      </Box>
     </Card>
   )
 }
+
 
 export default ResumeUpload;

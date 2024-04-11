@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/providers/Providers";
 import AuthProvider from "@/providers/AuthProvider";
 import { GlobalContextProvider } from "@/providers/UserContext";
+import { JobAwardProvider } from "@/providers/JobAwardProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

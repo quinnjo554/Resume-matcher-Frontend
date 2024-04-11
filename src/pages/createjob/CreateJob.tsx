@@ -4,10 +4,9 @@ import { useUserEmail } from '@/hooks/user/user-hooks';
 import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
 import React from 'react'
-import JobInputs from './components/JobInputs';
-import { Box, Center, Heading } from '@chakra-ui/react';
-import ResumeUpload from './components/ResumeUpload';
-
+import CreateJobInputs from './components/CreateJobInputs';
+import { FormProvider } from '@/providers/FormProvider';
+import { JobAwardProvider } from '@/providers/JobAwardProvider';
 function CreateJob() {
 
   //add user to db if user hasnt already been added
@@ -17,14 +16,14 @@ function CreateJob() {
   //get the user  
   const { data: user, isError } = useUserEmail(email, dUser);
 
+  // make this component cleaner
+  // apply single responsibillity pricible
   return (
     user && (
       <Navbar hasSearch={false} user={user}>
-        <Box alignSelf="center" p={5} width="50%">
-          <Heading size="2xl" p={2} pb={4}>Create Job</Heading>
-          <JobInputs></JobInputs>
-          <ResumeUpload></ResumeUpload>
-        </Box>
+        <FormProvider>
+          <CreateJobInputs></CreateJobInputs>
+        </FormProvider>
       </Navbar >
     )
   )
