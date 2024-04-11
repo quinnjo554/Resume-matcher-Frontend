@@ -4,12 +4,10 @@ import Navbar from '@/components/Navbar/Navbar';
 import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
 import { useUserEmail } from '@/hooks/user/user-hooks';
-import JobCard from './components/JobCard';
 import { Box } from '@chakra-ui/react';
 import { useMediaQuery } from '@chakra-ui/react';
-import { useJobByUserId } from '@/hooks/job/job-hooks';
 import JobBoard from './components/JobBoard';
-import { useDisclosure } from '@chakra-ui/react'
+import { JobAwardProvider } from '@/providers/JobAwardProvider';
 function Homepage() {
 
   //add user to db if user hasnt already been added
@@ -22,18 +20,20 @@ function Homepage() {
 
   return (
     user && (
-      <Navbar user={user}>
-        {isLargeScreen ? (
-          // Center on large screens using flexbox
-          <Box display="flex" mt={6} alignSelf="center" justifyContent="center">
-            <JobBoard user={user} />
-          </Box>
-        ) : (
-          // Center horizontally on smaller screens using CSS margin: auto
-          <Box marginX="auto" mt={6}>
-            <JobBoard user={user} />
-          </Box>
-        )}
+      <Navbar hasSearch={true} user={user}>
+        <JobAwardProvider>
+          {isLargeScreen ? (
+            // Center on large screens using flexbox
+            <Box display="flex" mt={6} alignSelf="center" justifyContent="center">
+              <JobBoard user={user} />
+            </Box>
+          ) : (
+            // Center horizontally on smaller screens using CSS margin: auto
+            <Box marginX="auto" mt={6}>
+              <JobBoard user={user} />
+            </Box>
+          )}
+        </JobAwardProvider>
       </Navbar>
     )
   );

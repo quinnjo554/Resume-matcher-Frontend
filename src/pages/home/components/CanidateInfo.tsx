@@ -15,8 +15,8 @@ export function CanidateInfo({ name, title, description, match, value }: { name:
   }, [match]);
 
   return (
-    <VStack p={4} align="start" spacing={4}>
-      <HStack spacing={4}>
+    <VStack p={4} align="start" spacing={4} >
+      <HStack spacing={4} _hover={{ transform: "scale(1.07)" }} transition="transform 0.2s">
         <CircularProgress value={progress} color='green.400'>
           <CircularProgressLabel>{progress}%</CircularProgressLabel>
         </CircularProgress>

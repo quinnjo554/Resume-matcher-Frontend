@@ -4,8 +4,9 @@ import { useUserEmail } from '@/hooks/user/user-hooks';
 import { useGlobalContext } from '@/providers/UserContext';
 import createDefaultUser from '@/utils/defaultUser';
 import React from 'react'
-import JobInputs from './components/JobInputs';
-
+import CreateJobInputs from './components/CreateJobInputs';
+import { FormProvider } from '@/providers/FormProvider';
+import { JobAwardProvider } from '@/providers/JobAwardProvider';
 function CreateJob() {
 
   //add user to db if user hasnt already been added
@@ -15,11 +16,15 @@ function CreateJob() {
   //get the user  
   const { data: user, isError } = useUserEmail(email, dUser);
 
+  // make this component cleaner
+  // apply single responsibillity pricible
   return (
     user && (
       <Navbar hasSearch={false} user={user}>
-        <JobInputs></JobInputs>
-      </Navbar>
+        <FormProvider>
+          <CreateJobInputs></CreateJobInputs>
+        </FormProvider>
+      </Navbar >
     )
   )
 }

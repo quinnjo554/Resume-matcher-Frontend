@@ -30,7 +30,7 @@ function NavbarHori({ user, children, hasSearch = true }: { user: User, children
   return (
     <div className="flex flex-col">
       <header className="flex h-26 lg:h-[80px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-200/40">
-        <Link className="lg:hidden" href="#">
+        <Link className="lg:hidden" href="/home">
           <BiCode className="h-6 w-6" />
         </Link>
         <div className="w-full flex-1">
@@ -80,7 +80,7 @@ function NavbarVert() {
           <nav className="grid items-start px-4 text-sm font-medium">
             <Link
               className="flex text-lg items-center gap-3 rounded-lg px-3 py-2 text-black transition-all hover:text-gray-400 dark:text-black dark:hover:text-gray-400"
-              href="#"
+              href="/home"
             >
               <BiHome />
               Home

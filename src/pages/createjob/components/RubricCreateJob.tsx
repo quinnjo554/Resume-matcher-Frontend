@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Flex, Button, Box, Input, VStack, Text, Divider, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useJobForm } from '@/hooks/job/job-hooks';
 
 
-function RubricInputs() {
+function RubricInputsCreateJob() {
 
   // WHEN HALE FINISHES ENDPOINTS COME BACK AND RUN GET RUBRIC BY ID THEN DO BELOW
   // if job.rubric = {} then use default values else fill in 
@@ -14,6 +15,7 @@ function RubricInputs() {
     { name: "Skills", value: 34 },
   ]);
 
+  const { formState, setFormState } = useJobForm(); // Use the context
   const handleInputChange = (index: number, value: string) => {
     // Convert the input value to a number
     const numericValue = Number(value);
@@ -29,6 +31,13 @@ function RubricInputs() {
   const handleDeleteField = (index: number) => {
     setFields(fields.filter((field, i) => i !== index));
   };
+
+  useEffect(() => {
+    setFormState(prevState => ({
+      ...prevState,
+      rubric: JSON.stringify(fields),
+    }));
+  }, [fields]);
 
 
   return (
@@ -46,11 +55,10 @@ function RubricInputs() {
       ))}
       <Flex>
         <Button mr={2} colorScheme="teal" onClick={handleAddField}>Add Field</Button>
-        <Button colorScheme="blue">Create</Button>
       </Flex>
     </VStack>
 
   )
 }
 
-export default RubricInputs
+export default RubricInputsCreateJob
