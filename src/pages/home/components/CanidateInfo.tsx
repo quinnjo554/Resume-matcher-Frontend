@@ -22,8 +22,7 @@ export function CanidateInfo({ name, title, description, match, value }: { name:
         </CircularProgress>
         <VStack width="full" align="start" spacing={1}>
           <Text fontWeight="semibold">{value + 1}. {name}</Text>
-          <Text fontSize="sm" color="gray.500">Senior Frontend Developer</Text>
-          <Text maxWidth="100%" fontSize="sm" color="gray.500">
+          <Text isTruncated maxWidth="350px" fontSize="sm" color="gray.500">
             {description}
           </Text>
         </VStack>

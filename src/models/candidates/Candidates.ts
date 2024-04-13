@@ -3,6 +3,7 @@ interface Candidate {
   name: string;
   resume: string;
   resume_score: number;
+  resume_score_description: string;
   contact: string;
   job: number; //id
 }
