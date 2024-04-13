@@ -7,6 +7,7 @@ import React from 'react'
 import CreateJobInputs from './components/CreateJobInputs';
 import { FormProvider } from '@/providers/FormProvider';
 import { JobAwardProvider } from '@/providers/JobAwardProvider';
+import Providers from '@/providers/Providers';
 function CreateJob() {
 
   //add user to db if user hasnt already been added

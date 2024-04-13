@@ -6,13 +6,15 @@ import { useState } from "react";
 import { GlobalContextProvider } from "./UserContext";
 import { JobAwardProvider } from "./JobAwardProvider";
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [client] = useState(new QueryClient());
+  const queryClient = new QueryClient();
 
   return (
-    <ChakraProvider>
-      <JobAwardProvider>
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
-      </JobAwardProvider>
-    </ChakraProvider>
+    <QueryClientProvider contextSharing={true} client={queryClient}>
+      <ChakraProvider>
+        <JobAwardProvider>
+          {children}
+        </JobAwardProvider>
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }

@@ -34,7 +34,7 @@ export async function DeleteJobById(id: number) {
   return data
 }
 
-export async function PostJob(job: JobRequest) {
+export async function PostJob(job: JobRequest): Promise<Job> {
   console.log(JSON.stringify(job));
   const response = await fetch(`http://localhost:8000/job/add/user/`, {
     method: 'POST',

@@ -49,7 +49,6 @@ function RubricInputs() {
         <Button colorScheme="blue">Create</Button>
       </Flex>
     </VStack>
-
   )
 }
 

@@ -12,7 +12,7 @@ function ResumeModal({ job, onOpen, onClose, isOpen }: { job: Job, onOpen: () =>
         <ModalHeader fontSize="lg" fontWeight="bold">Rubric</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <RubricInputs isUpdateFields={true} />
+          <RubricInputs />
         </ModalBody>
       </ModalContent>
     </Modal>

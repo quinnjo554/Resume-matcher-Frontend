@@ -13,16 +13,17 @@ import { CanidateInfo } from './CanidateInfo';
 import RubricModal from '../../../components/Modal/RubricModal'
 import { DeleteJobById } from "@/hooks/job/job-hooks";
 import { useQueryClient } from "react-query";
+import CandidateAwardModal from "@/components/Modal/CandidateAwardModal";
 const JobCard = ({ job }: { job: Job }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast();
   const { data: candidates, isError } = useCandidatesByJobId(Number(job.id));
   const [message, setMessage] = useState("");
-  const MAX_CANDIDATES_TO_DISPLAY = 4;
+  const MAX_CANDIDATES_TO_DISPLAY = 5;
   const jobPriority = job.priority[0].toUpperCase() + job.priority.slice(1, job.priority.length) // Just for uppercase
 
   const queryClient = useQueryClient(); // For refectching after delete
-
+  const sortedCandidates = candidates ? [...candidates].sort((a, b) => b.resume_score - a.resume_score) : [];
   if (isError) {
     return <p>Error</p>
   }
@@ -41,9 +42,12 @@ const JobCard = ({ job }: { job: Job }) => {
     })
   }
 
-  return (candidates && (
+  return (candidates && sortedCandidates.length > 0 && (
+
     <Card shadow="2xl" display="flex" w="1100px" maxW="1100px" minW="100px" >
+
       <HStack alignSelf="center" p={4} spacing={4} alignItems="center">
+
         <FaBriefcase size={24} />
         <Text fontSize="lg" fontWeight="semibold">{job.name}</Text>
         <Box position="absolute" top={2} right={2}>
@@ -68,16 +72,15 @@ const JobCard = ({ job }: { job: Job }) => {
         <Text>{jobPriority} priority</Text>
       </HStack>
       <RubricModal job={job} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
+
       {
-        candidates
-          .sort((a, b) => b.resume_score - a.resume_score) // Sort candidates by resume_score in descending order
-          .slice(0, MAX_CANDIDATES_TO_DISPLAY) // Take only the top 4 candidates
+        sortedCandidates.slice(0, MAX_CANDIDATES_TO_DISPLAY) // Take only the top 4 candidates
           .map((candidate, index) => (
             <CanidateInfo
               key={index} // Using index as key since we're mapping through a subset of candidates
               name={candidate.name}
               title={candidate.contact}
-              description={candidate.resume}
+              description={candidate.resume_score_description}
               match={candidate.resume_score}
               value={index}
             />
