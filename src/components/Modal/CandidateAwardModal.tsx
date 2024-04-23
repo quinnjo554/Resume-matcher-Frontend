@@ -14,8 +14,8 @@ function CandidateAwardModal({ job }: { job: Job }) {
   const [isNewJob, setIsNewJob] = useState(JSON.parse(localStorage.getItem('isNewJob') || "false")); //using this
   const [isConfetti, setIsConfetti] = useState(JSON.parse(localStorage.getItem('isNewJob') || "false")); //using this
 
-  const { data: candidates, isError } = useCandidatesByJobId(Number(job.id));
 
+  const { data: candidates, isError } = job ? useCandidatesByJobId(Number(job.id) ?? 0) : { data: null, isError: false };
   const sortedCandidates = candidates ? [...candidates].sort((a, b) => b.resume_score - a.resume_score) : [];
   const candidate = sortedCandidates[0];
 
@@ -33,6 +33,8 @@ function CandidateAwardModal({ job }: { job: Job }) {
     setIsNewJob(localStorage.setItem('isNewJob', JSON.stringify(false)));
     onClose();
   }
+
+
   return (candidate && (
     <Modal isOpen={isNewJob} onClose={onClose} >
       {isConfetti && <Confetti />}
@@ -53,8 +55,7 @@ function CandidateAwardModal({ job }: { job: Job }) {
             {candidate.contact && <Text className="text-sm mt-2 text-gray-400">{candidate.contact}</Text>}
           </div>
           <Box
-            className="flex justify-center items-center rounded-lg p-4 shadow-lg mt-4"
-          >
+            className="flex justify-center items-center rounded-lg p-4 shadow-lg mt-4">
             <Text className="text-lg font-bold text-white">This might take a few seconds. Thank you for your patience.</Text>
           </Box>
         </ModalBody>

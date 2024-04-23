@@ -17,8 +17,6 @@ function CreateJob() {
   //get the user  
   const { data: user, isError } = useUserEmail(email, dUser);
 
-  // make this component cleaner
-  // apply single responsibillity pricible
   return (
     user && (
       <Navbar hasSearch={false} user={user}>

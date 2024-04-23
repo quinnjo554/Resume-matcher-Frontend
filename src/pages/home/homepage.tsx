@@ -11,11 +11,12 @@ import { JobAwardProvider } from '@/providers/JobAwardProvider';
 function Homepage() {
 
   //add user to db if user hasnt already been added
-  const { name, email, image } = useGlobalContext();
+  const { name, email } = useGlobalContext();
   //check if user is authenticated, then post them to the db
   const dUser = createDefaultUser(name, email); //autoinit a user
   //get the user  
-  const { data: user, isError } = useUserEmail(email, dUser);
+  const { data: user } =
+    useUserEmail(email, dUser);
   const [isLargeScreen] = useMediaQuery('(min-width: 768px)');
 
   return (

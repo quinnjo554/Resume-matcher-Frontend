@@ -1,5 +1,5 @@
 interface Job {
-  id: string;
+  id: number;
   name: string;
   jod_description: string;
   user: number; //id

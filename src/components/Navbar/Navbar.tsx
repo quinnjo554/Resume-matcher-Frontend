@@ -15,6 +15,7 @@ import { IconButton, Input } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import { signOut } from 'next-auth/react';
 import User from '../../models/user/User';
+import EditUserModal from '../Modal/EditUserModal';
 //have this take a user. Display a users avatar and jobs
 
 function Navbar({ children, user, hasSearch }: { children: ReactNode, user: User, hasSearch: boolean }) {
@@ -27,6 +28,7 @@ function Navbar({ children, user, hasSearch }: { children: ReactNode, user: User
 }
 
 function NavbarHori({ user, children, hasSearch = true }: { user: User, children: ReactNode, hasSearch?: boolean }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div className="flex flex-col">
       <header className="flex h-26 lg:h-[80px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-200/40">
@@ -55,7 +57,8 @@ function NavbarHori({ user, children, hasSearch = true }: { user: User, children
             )}
           </Box>
         </div>
-        <Avatar size="lg" src={user?.pfp ?? ""}></Avatar>
+        <Avatar onClick={onOpen} size="lg" src={user?.pfp ?? ""}></Avatar>
+        <EditUserModal user={user} isOpen={isOpen} onClose={onClose}></EditUserModal>
       </header>
       {children}
     </div>
