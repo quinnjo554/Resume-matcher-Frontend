@@ -22,7 +22,7 @@ function ResumeUpload() {
       </Box>
       <Box p="6" borderWidth="2px" borderRadius="md" borderStyle="dashed" borderColor="gray.200" h="200px" display="flex" alignItems="center" justifyContent="center">
         <Icon as={FiPlus} w="6" h="6" opacity="0.5" />
-        <input type="file" accept=".pdf" onChange={onFileChange} style={{ display: 'none' }} id="file-upload" multiple />
+        <input required type="file" accept=".pdf" onChange={onFileChange} style={{ display: 'none' }} id="file-upload" multiple />
         <label htmlFor="file-upload" className="cursor-pointer">Click to select files</label>
       </Box>
       <Box>

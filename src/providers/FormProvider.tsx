@@ -7,6 +7,7 @@ interface FormState {
   location: string;
   priority: string;
   rubric: string;  // Saved as a stringified json object
+  rubric_values: number;
   resumes: File[]; // Assuming resumes are File objects
 
 }
@@ -24,6 +25,7 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
     location: '',
     priority: '',
     rubric: '',
+    rubric_values: 0,
     resumes: [],
   });
 

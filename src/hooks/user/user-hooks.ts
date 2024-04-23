@@ -21,6 +21,19 @@ export function useUserEmail(email: string, user: UserRequest): UseQueryResult<U
   });
 }
 
+export async function useUpdateUser(userId: number, user: UserRequest): Promise<User> {
+  const response = await fetch(`http://localhost:8000/user/update/${userId}`, {
+    method: "PUT",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+  const data = await response.json();
+  return data;
+}
+
+
 export function getUser(email: string | undefined): UseQueryResult<User, unknown> {
   return useQuery(['User', email], async () => {
     const response = await fetch(`http://localhost:8000/user/email/${email}`);

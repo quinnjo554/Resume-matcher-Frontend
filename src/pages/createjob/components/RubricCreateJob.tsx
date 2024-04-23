@@ -7,7 +7,6 @@ import { useJobForm } from '@/hooks/job/job-hooks';
 
 function RubricInputsCreateJob() {
 
-  // WHEN HALE FINISHES ENDPOINTS COME BACK AND RUN GET RUBRIC BY ID THEN DO BELOW
   // if job.rubric = {} then use default values else fill in 
   const [fields, setFields] = useState([
     { name: "Education", value: 33 },

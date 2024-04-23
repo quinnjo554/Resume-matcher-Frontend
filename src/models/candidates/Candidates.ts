@@ -1,7 +1,7 @@
 interface Candidate {
   id: number;
   name: string;
-  resume: string;
+  resume: File;
   resume_score: number;
   resume_score_description: string;
   contact: string;

@@ -25,18 +25,12 @@ function JobInputs() {
               Description
             </Text>
             <Textarea
-              className="resize-none h-[150px] text-sm p-3"
+              className="resize-none text-sm p-3"
               id="description"
               placeholder="Enter job description"
               required
               onChange={handleChange}
             />
-          </div>
-          <div className="space-y-2">
-            <Text className="text-lg font-medium leading-none tracking-tighter">
-              Location
-            </Text>
-            <Input className="w-full text-lg" id="location" placeholder="Enter job location" required onChange={handleChange} />
           </div>
           <div className="space-y-2">
             <Text className="text-lg font-medium leading-none tracking-tighter">
