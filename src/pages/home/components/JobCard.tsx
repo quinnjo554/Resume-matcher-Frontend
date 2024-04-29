@@ -15,6 +15,7 @@ import RubricModal from '../../../components/Modal/RubricModal'
 import { DeleteJobById } from "@/hooks/job/job-hooks";
 import { useQueryClient } from "react-query";
 import CandidateInfo from "./CanidateInfo";
+import Link from "next/link";
 
 
 const JobCard = ({ job }: { job: Job, }) => {
@@ -85,13 +86,20 @@ const JobCard = ({ job }: { job: Job, }) => {
             <MenuButton as={IconButton} icon={<FaEllipsisH />} />
             <MenuList>
               <MenuItem onClick={onOpen} icon={<FaRegFileAlt />}>Change Rubric</MenuItem>
-              <MenuItem icon={<FaEdit />}>Edit job</MenuItem>
+
+              <Link href={`/job/${job.id}`}>
+                <MenuItem icon={<FaEdit />}>
+                  Edit job
+                </MenuItem>
+              </Link>
               <MenuItem onClick={() => handleDelete(Number(job.id))} icon={<FaTrashAlt color="red.500" />}>Delete</MenuItem>
             </MenuList>
           </Menu>
         </Box>
       </HStack>
+
       <HStack width="full" justifyContent="center" alignSelf="center" p={4} spacing={4}>
+
         <FaCalendarCheck opacity={0.5} />
         <Text>{timeAgo}</Text>
         <Divider orientation="vertical" height="16px" mx={2.5} />
@@ -100,6 +108,7 @@ const JobCard = ({ job }: { job: Job, }) => {
         <Divider orientation="vertical" height="16px" mx={2.5} />
         <FaStar opacity={0.5} />
         <Text>{jobPriority} priority</Text>
+
       </HStack>
       <RubricModal job={job} onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
       {
@@ -112,7 +121,8 @@ const JobCard = ({ job }: { job: Job, }) => {
             />
           ))
       }
-    </Card>
+
+    </Card >
   )
   )
 }

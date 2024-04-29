@@ -2,6 +2,7 @@ import Candidate from "@/models/candidates/Candidates";
 import { CircularProgress, CircularProgressLabel, HStack, Text, VStack } from "@chakra-ui/react";
 import { Document } from "react-pdf";
 import Link from "next/link";
+import decodeBase64 from 'base64-js';
 import React, { useEffect, useState } from "react";
 
 export default function CandidateInfo({ candidate, value }: { candidate: Candidate, value: number }) {
@@ -26,10 +27,8 @@ export default function CandidateInfo({ candidate, value }: { candidate: Candida
     width: '70%',
     opacity: 1,
   };
-  let contents = candidate.resume; // This should be your file content
-  let blob = new Blob([contents], { type: 'text/plain' }); // Create a blob from the string
-  let file = new File([blob], "resume.txt", { type: "text/plain" }); // Create a file from the blob
-  console.log(file.text())
+
+
   const shortDescription = isHovering ? candidate.resume_score_description : `${candidate.resume_score_description.slice(0, 30)}...`;
   return (
     <VStack p={4} align="start" spacing={4}>
