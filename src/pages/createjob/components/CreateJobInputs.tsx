@@ -34,6 +34,7 @@ function CreateJobInputs() {
       name: formState.title,
       jod_description: formState.description,
       rubric_id: rubricData.id, //needs to make a rubric and use that id
+      location: formState.location,
       user_id: Number(user?.id),
       date_created: new Date(),
       priority: formState.priority.toLowerCase(),

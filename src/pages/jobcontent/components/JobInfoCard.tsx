@@ -47,6 +47,7 @@ function JobInfoCard({ jobId }: { jobId: number }) {
         user_id: job.user,
         priority: job.priority,
         rubric_id: job.rubric_id,
+        location: job.location,
         date_created: job.date_created
       }
       await useUpdateJob(jobId, jobToUpdate);
@@ -60,13 +61,12 @@ function JobInfoCard({ jobId }: { jobId: number }) {
     setJobDescription(value);
   };
 
-
-  return candidates && (
+  return candidates && (job && (
     <Card shadow="2xl" className="mt-16 w-full max-w-4xl mx-auto">
       <Box className="m-5 space-y-2">
         <div className="space-y-2">
           <h1 className="text-3xl font-bold">{job?.name}</h1>
-          <p className="text-gray-500 dark:text-gray-400">New York, NY</p>
+          <h1 className="text-gray-500 dark:text-gray-400">{job.location}</h1>
           <span className={`text-sm inline-block ${priorityColors} text-white dark:text-gray-900 dark:bg-yellow-300 px-2 py-1 rounded-full`}>
             {job?.priority}
           </span>
@@ -98,6 +98,7 @@ function JobInfoCard({ jobId }: { jobId: number }) {
       </Box>
     </Card>
   )
+  )
 }
 
 
@@ -115,8 +116,8 @@ function AddResumeModal({ jobId, isDescriptionChanged, candidates, refetchCandid
     //CANNOT USE value.resume because we arnt acually saving a file.
     //Need hale to give us a fiel
     //if not just take out isDescriptionChanged ? candidates.map((value) => postCandidateScore(jobId, value.resume)) :
-    const promises = isDescriptionChanged ? candidates.map((value) => postCandidateScore(jobId, value.resume)) : formState.resumes.map((value) => postCandidateScore(jobId, value));
-    await Promise.all(promises);
+    //const promises = isDescriptionChanged ? candidates.map((value) => postCandidateScore(jobId, value.resume)) : formState.resumes.map((value) => postCandidateScore(jobId, value));
+    //await Promise.all(promises);
     setFormState(prevState => ({ ...prevState, resumes: [] })); //set resumes to empty so a user doesnt rescore the same person they already added
     refetchCandidates();
     setIsLoading(false)

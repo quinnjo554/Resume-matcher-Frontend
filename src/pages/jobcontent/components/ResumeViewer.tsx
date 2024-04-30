@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
-function ResumeViewer() {
+function ResumeViewer({ file }: { file: File }) {
   const [numPages, setNumPages] = useState<any>(null);
   const [pdf, setPdf] = useState<any>();
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
@@ -12,7 +12,7 @@ function ResumeViewer() {
   return (
     <div>
       <Document
-        file={pdf}
+        file={file}
         onLoadSuccess={onDocumentLoadSuccess}
       >
         {Array.from(new Array(numPages), (el, index) => (

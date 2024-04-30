@@ -34,6 +34,12 @@ function JobInputs() {
           </div>
           <div className="space-y-2">
             <Text className="text-lg font-medium leading-none tracking-tighter">
+              Location
+            </Text>
+            <Input className="w-full text-lg" id="location" placeholder="Enter job location" required onChange={handleChange} />
+          </div>
+          <div className="space-y-2">
+            <Text className="text-lg font-medium leading-none tracking-tighter">
               Priority
             </Text>
             <Select className="w-full text-lg" placeholder='Select Priority' id="priority" onChange={handleChange}>

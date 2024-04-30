@@ -26,11 +26,9 @@ function JobBoard({ user }: { user: User }) {
       <Box>
         {<CandidateAwardModal job={jobs[jobs.length - 1]} />}
         {jobs.map((job) => (job && (
-          <Link href={`/job/${job.id}`}>
-            <Box key={job.id} display="flex" mt={3} alignItems="center" justifyContent="center">
-              <JobCard job={job} />
-            </Box>
-          </Link>
+          <Box key={job.id} display="flex" mt={3} alignItems="center" justifyContent="center">
+            <JobCard job={job} />
+          </Box>
         )))}
       </Box>
     );
